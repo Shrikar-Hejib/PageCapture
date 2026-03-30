@@ -133,7 +133,7 @@ def crawl(start_url, max_pages=50, timeout=10):
 
             # Extract links - resolve relative to current page URL
             for a in soup.find_all('a', href=True):
-                href = a['href'].strip()
+                href = str(a['href']).strip()
                 if not href or href.startswith(('mailto:', 'tel:', 'javascript:', '#')):
                     continue
                 full = _normalize(urljoin(url, href))
