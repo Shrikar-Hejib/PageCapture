@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: pagecapture
+    env: python
+    buildCommand: "bash build.sh"
+    startCommand: "gunicorn urlpdf.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: DEBUG
+        value: False
