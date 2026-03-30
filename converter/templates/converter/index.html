@@ -1,0 +1,53 @@
+{% extends "converter/base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="container flex-grow-1 d-flex flex-column justify-content-center align-items-center text-center py-5 position-relative" id="heroSection">
+  <div class="pc-hero-glow position-absolute top-50 start-50 translate-middle rounded-circle"></div>
+  <div class="position-relative z-1" style="max-width: 640px;">
+    <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 mb-4 py-2 px-3 fw-medium">
+      <i class="bi bi-lightning-fill"></i> Website → PDF in minutes
+    </span>
+    <h1 class="display-4 fw-bold mb-3 text-gradient">Capture every page.</h1>
+    <p class="text-secondary mb-5 fs-5">Enter any URL. Crawl every page, convert them to high-fidelity PDF, and package them for download.</p>
+
+    <div class="mx-auto" style="max-width: 500px;">
+      <div class="d-flex input-box rounded-3 p-1">
+        <span class="input-group-text bg-transparent border-0 text-secondary"><i class="bi bi-globe2"></i></span>
+        <input type="url" id="urlInput" class="form-control bg-transparent border-0 text-light shadow-none py-2" placeholder="https://example.com" autocomplete="off" onkeypress="if(event.key==='Enter') startCrawl()">
+        <button class="btn btn-primary px-4 fw-semibold rounded-2" id="crawlBtn" onclick="startCrawl()">
+          Crawl Site <i class="bi bi-arrow-right ms-1"></i>
+        </button>
+      </div>
+      <div class="text-secondary mt-3 small opacity-75">
+        <i class="bi bi-info-circle me-1"></i> Crawls up to 50 pages &middot; Detects embedded videos
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container flex-grow-1 justify-content-center align-items-center py-5 w-100 h-100" id="progressSection" style="display:none !important;">
+  <div class="card bg-card border-secondary border-opacity-50 w-100 shadow-lg mx-auto" style="max-width: 480px;">
+    <div class="card-body p-4 p-md-5">
+      <div class="d-flex align-items-center gap-4 mb-4">
+        <div class="spinner-border text-primary" style="width: 2.5rem; height: 2.5rem;" role="status"></div>
+        <div>
+          <h5 class="fw-bold mb-1 text-white">Analyzing website…</h5>
+          <p class="text-secondary small mb-0">Discovering internal pages mapping routes.</p>
+        </div>
+      </div>
+      <div class="progress mb-3 bg-secondary bg-opacity-25 rounded-pill" style="height: 6px;">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" id="progressBarFill" style="width: 0%"></div>
+      </div>
+      <div class="d-flex justify-content-between text-secondary small fw-medium">
+        <span id="progressCount">0 pages found</span>
+        <span id="progressTime" class="text-primary opacity-75"></span>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'converter/js/app.js' %}"></script>
+{% endblock %}
